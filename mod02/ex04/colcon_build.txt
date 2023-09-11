@@ -1,0 +1,5 @@
+Starting >>> ex03
+
+Summary: 0 packages finished [0.92s]
+  1 package failed: ex03
+  1 package had stderr output: ex03
