@@ -1,2 +1,0 @@
-Invoking command in '/home/mar/Документы/Robotics/mod02/ex03/build/ex03': CMAKE_PREFIX_PATH=/opt/ros/rolling /home/mar/.local/bin/cmake /home/mar/Документы/Robotics/mod02/ex03 -DCMAKE_INSTALL_PREFIX=/home/mar/Документы/Robotics/mod02/ex03/install/ex03
-Invoked command in '/home/mar/Документы/Robotics/mod02/ex03/build/ex03' returned '1': CMAKE_PREFIX_PATH=/opt/ros/rolling /home/mar/.local/bin/cmake /home/mar/Документы/Robotics/mod02/ex03 -DCMAKE_INSTALL_PREFIX=/home/mar/Документы/Robotics/mod02/ex03/install/ex03

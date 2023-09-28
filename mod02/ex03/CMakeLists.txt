@@ -23,4 +23,8 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package(std_msgs, rclpy, rclcpp)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  DEPENDENCIES std_msgs, rclpy, rclcpp # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
+)
+
+ament_package()

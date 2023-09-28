@@ -1,7 +1,0 @@
-CMake Error at /opt/ros/rolling/share/ament_cmake_core/cmake/core/ament_package.cmake:74 (message):
-  ament_package() called with unused arguments: std_msgs,;rclpy,;rclcpp
-Call Stack (most recent call first):
-  /opt/ros/rolling/share/ament_cmake_core/cmake/core/ament_package.cmake:68 (_ament_package)
-  CMakeLists.txt:26 (ament_package)
-
-
