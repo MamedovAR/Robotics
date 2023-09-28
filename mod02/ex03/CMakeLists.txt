@@ -23,6 +23,10 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+find_package(std_msgs REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(rclcpp REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES std_msgs, rclpy, rclcpp # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
 )
