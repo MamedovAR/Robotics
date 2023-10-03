@@ -1,0 +1,49 @@
+
+   NETWORK CONFIGURATION
+inet         : 127.0.0.1
+inet4        : ['127.0.0.1']
+inet6        : ['::1']
+netmask      : 255.0.0.0
+device       : lo
+flags        : 73<UP,LOOPBACK,RUNNING>
+mtu          : 65536
+inet         : 192.168.1.130
+inet4        : ['192.168.1.130']
+ether        : d4:93:90:20:05:c9
+netmask      : 255.255.255.0
+device       : enp3s0
+flags        : 4163<UP,MULTICAST,RUNNING,BROADCAST>
+mtu          : 1500
+broadcast    : 192.168.1.255
+inet         : 192.168.1.53
+inet4        : ['192.168.1.53']
+ether        : c4:d0:e3:5f:11:bc
+inet6        : ['fe80::350:89ec:f5a7:17ee%wlp0s20f3']
+netmask      : 255.255.255.0
+device       : wlp0s20f3
+flags        : 4163<UP,MULTICAST,RUNNING,BROADCAST>
+mtu          : 1500
+broadcast    : 192.168.1.255
+
+   PLATFORM INFORMATION
+system           : Linux
+platform info    : Linux-6.2.0-33-generic-x86_64-with-glibc2.35
+release          : 6.2.0-33-generic
+processor        : x86_64
+
+   QOS COMPATIBILITY LIST
+compatibility status    : No publisher/subscriber pairs found
+
+   RMW MIDDLEWARE
+middleware name    : rmw_fastrtps_cpp
+
+   ROS 2 INFORMATION
+distribution name      : humble
+distribution type      : ros2
+distribution status    : active
+release platforms      : {'debian': ['bullseye'], 'rhel': ['8'], 'ubuntu': ['jammy']}
+
+   TOPIC LIST
+topic               : none
+publisher count     : 0
+subscriber count    : 0

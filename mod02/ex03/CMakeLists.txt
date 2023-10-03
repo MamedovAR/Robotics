@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(ex03)
+project(MamedovAR)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,6 +7,9 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -22,13 +25,5 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-find_package(std_msgs REQUIRED)
-find_package(rclpy REQUIRED)
-find_package(rclcpp REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  DEPENDENCIES std_msgs, rclpy, rclcpp # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
-)
 
 ament_package()

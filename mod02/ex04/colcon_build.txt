@@ -1,2 +1,5 @@
+Starting >>> MamedovAR
+Finished <<< MamedovAR [0.68s]
 
-Summary: 0 packages finished [0.13s]
+Summary: 1 package finished [1.22s]
+  1 package had stderr output: MamedovAR
