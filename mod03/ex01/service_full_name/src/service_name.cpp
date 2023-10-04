@@ -1,3 +1,4 @@
+#include <iostream>
 #include "rclcpp/rclcpp.hpp"
 #include "full_name_message/srv/full_name_sum_service.hpp"
 
@@ -16,8 +17,10 @@ private:
     void calculateFullName(
         const std::shared_ptr<full_name_message::srv::FullNameSumService::Request> request,
         std::shared_ptr<full_name_message::srv::FullNameSumService::Response> response)
-    {
+    {   
         response->full_name = request->last_name + ' ' + request->name + ' ' + request->first_name;
+        std::cout << response->full_name << "\n";
+        RCLCPP_INFO(this->get_logger(), "%s", response->full_name);
     }
 
     rclcpp::Service<full_name_message::srv::FullNameSumService>::SharedPtr service_;

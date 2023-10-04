@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string.h>
 #include "rclcpp/rclcpp.hpp"
 #include "full_name_message/srv/full_name_sum_service.hpp"
@@ -39,33 +40,50 @@ int main(int argc, char *argv[])
     rclcpp::init(argc, argv);
     auto node = std::make_shared<ClientNameNode>();
     std::string last_name, first_name, name;
+    std::cout << argc << "\n";
     for(int i=argc-1; i>=argc-3; i--)
     {
         char k=0;
         for(int j=0; j<strlen(argv[i]); j++)
         {
             if(argv[i][2]=='f')
+            {
                 if(k==1)
-                    first_name.append(&argv[i][j]);
+                {
+                    first_name+=(argv[i][j]);
+                    // break;
+                }
                 else if(argv[i][j]=='=')
                     k++;
+            }
             else if(argv[i][2]=='l')
+            {
                 if(k==1)
-                    last_name.append(&argv[i][j]);
+                {
+                    first_name+=(argv[i][j]);
+                    // break;
+                }
                 else if(argv[i][j]=='=')
                     k++;
+            }
             else if(argv[i][2]=='n')
+            {
                 if(k==1)
-                    name.append(&argv[i][j]);
+                {
+                    first_name+=(argv[i][j]);
+                    // break;
+                }
                 else if(argv[i][j]=='=')
                     k++;
+            }
             else
             {
-                std::cout << "Use --first_name, --last_name, --name\n";
+                std::cout << "Use --first_name=, --last_name=, --name=\n";
                 exit(0);
             }
         }
     }
+    std::cout << last_name << name << first_name;
     node->run(last_name, name, first_name);
     rclcpp::shutdown();
     return 0;
