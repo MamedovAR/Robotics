@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     rclcpp::init(argc, argv);
     auto node = std::make_shared<ClientNameNode>();
     std::string last_name, first_name, name;
-    std::cout << argc << "\n";
     for(int i=argc-1; i>=argc-3; i--)
     {
         char k=0;
@@ -78,7 +77,6 @@ int main(int argc, char *argv[])
             }
             else
             {
-                std::cout << "Use --first_name=, --last_name=, --name=\n";
                 exit(0);
             }
         }
