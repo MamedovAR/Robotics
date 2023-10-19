@@ -1,10 +1,10 @@
 rosbag2_bagfile_information:
   version: 5
-  storage_identifier: ""
+  storage_identifier: mcap
   duration:
-    nanoseconds: 57347374130
+    nanoseconds: 36163829440
   starting_time:
-    nanoseconds_since_epoch: 1696454654527245001
+    nanoseconds_since_epoch: 1697691182527763277
   message_count: 20
   topics_with_message_count:
     - topic_metadata:
@@ -16,6 +16,11 @@ rosbag2_bagfile_information:
   compression_format: ""
   compression_mode: ""
   relative_file_paths:
-    - turtle_cmd_vel_0.db3
+    - turtle_cmd_vel_0.mcap
   files:
-    []
+    - path: turtle_cmd_vel_0.mcap
+      starting_time:
+        nanoseconds_since_epoch: 1697691182527763277
+      duration:
+        nanoseconds: 36163829440
+      message_count: 20
