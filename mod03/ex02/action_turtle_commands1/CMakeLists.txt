@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(move_to_goal)
+project(action_turtle_commands1)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,13 +7,10 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(action_tutorials_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(geometry_msgs REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
-# find_package(rclcpp REQUIRED)
-# find_package(geometry_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -26,19 +23,8 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-# Add executables
-add_executable(move_to_goal src/move_to_goal.cpp)
-
-# Specify dependencies for the executable
-# ament_target_dependencies(move_to_goal geometry_msgs)
-ament_target_dependencies(move_to_goal geometry_msgs rclcpp)
-
-install(TARGETS
-  move_to_goal
-  DESTINATION lib/${PROJECT_NAME})
-
-# Export dependencies
-ament_export_dependencies(ament_cmake)
+rosidl_generate_interfaces(${PROJECT_NAME}
+	"action/MessageTurtleCommands.action"
+)
 
 ament_package()

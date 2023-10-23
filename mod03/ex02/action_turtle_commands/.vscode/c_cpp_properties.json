@@ -1,15 +1,22 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
             "includePath": [
-                "${workspaceFolder}/**"
+                "/opt/ros/humble/include/**",
+                "/usr/include/**",
+                "~/",
+                "/home/mar/ros2_ws/build/action_turtle_commands1/rosidl_generator_cpp",
+                "/home/mar/ros2_foxy/src/ros2/rclcpp/rclcpp_components/include"
             ],
-            "defines": [],
-            "compilerPath": "/usr/bin/clang-14",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14"
         }
     ],
     "version": 4

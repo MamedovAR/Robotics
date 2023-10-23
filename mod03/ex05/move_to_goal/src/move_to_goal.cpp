@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "geometry_msgs/msg/Twist.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
 class MoveToGoalNode : public rclcpp::Node
 {
@@ -7,13 +7,21 @@ public:
   MoveToGoalNode()
     : Node("move_to_goal")
   {
-    this->declare_parameters("goal");
-    this->get_parameters("goal", goal_params_);
+    this->declare_parameter("x", 0.0);
+    this->declare_parameter("y", 0.0);
+    this->declare_parameter("theta", 0.0);
 
-    double x, y, theta;
-    if (goal_params_.get_parameter("x", x) &&
-        goal_params_.get_parameter("y", y) &&
-        goal_params_.get_parameter("theta", theta))
+    double x = this->get_parameter("x").as_double();
+    double y = this->get_parameter("y").as_double();
+    double theta = this->get_parameter("theta").as_double();
+
+    goal_reached_ = false;
+    goal_x_ = x;
+    goal_y_ = y;
+    goal_theta_ = theta;
+    if (this->get_parameter("x", x) &&
+        this->get_parameter("y", y) &&
+        this->get_parameter("theta", theta))
     {
       goal_reached_ = false;
       goal_x_ = x;
