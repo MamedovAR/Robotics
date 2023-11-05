@@ -9,6 +9,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(turtlesim REQUIRED)
+# find_package(service_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -32,13 +34,14 @@ add_executable(move_to_goal src/move_to_goal.cpp)
 
 # Specify dependencies for the executable
 # ament_target_dependencies(move_to_goal geometry_msgs)
-ament_target_dependencies(move_to_goal geometry_msgs rclcpp)
+ament_target_dependencies(move_to_goal geometry_msgs rclcpp turtlesim)
 
 install(TARGETS
+
   move_to_goal
   DESTINATION lib/${PROJECT_NAME})
 
 # Export dependencies
-ament_export_dependencies(ament_cmake)
+# ament_export_dependencies(ament_cmake)
 
 ament_package()
