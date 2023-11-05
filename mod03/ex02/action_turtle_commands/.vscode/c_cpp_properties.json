@@ -10,7 +10,9 @@
                 "/usr/include/**",
                 "~/",
                 "/home/mar/ros2_ws/build/action_turtle_commands1/rosidl_generator_cpp",
-                "/home/mar/ros2_foxy/src/ros2/rclcpp/rclcpp_components/include"
+                "include",
+                "/home/mar/ros2_foxy/src/ros2/rclcpp/rclcpp_components/include",
+                "${workspaceFolder}/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",
