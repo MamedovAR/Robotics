@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/humble/include/**",
+        "/home/mar/ros2_ws1/src/actual_turtle_launcher/include/**",
+        "/home/mar/ros2_ws1/src/learning_tf2_cpp/include/**",
+        "/home/mar/ros2_ws1/src/move_to_goal/include/**",
+        "/home/mar/ros2_ws1/src/my_turtle_package/include/**",
+        "/home/mar/ros2_ws1/src/time_travel/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
