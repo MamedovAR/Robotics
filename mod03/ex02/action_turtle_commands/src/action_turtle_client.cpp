@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <unistd.h>
 #include <functional>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -74,10 +75,13 @@ public:
       std::bind(&ActionTurtleClient::result_callback, this, _1);
     this->client_ptr_->async_send_goal(goal_msg, send_goal_options);
     std::cout << "Send one\n";
+    // sleep(5);
     this->client_ptr_->async_send_goal(goal_msg1, send_goal_options);
     std::cout << "Send two\n";
+    // sleep(5);
     this->client_ptr_->async_send_goal(goal_msg2, send_goal_options);
     std::cout << "Send three\n";
+    // sleep(5);
     this->client_ptr_->async_send_goal(goal_msg3, send_goal_options);
     std::cout << "Send four\n";
   }
@@ -89,7 +93,7 @@ private:
   ACTION_TURTLE_COMMANDS_LOCAL
   void goal_response_callback(const GoalHandleTurtle::SharedPtr & goal_handle)
   {
-    std::cout << "In goal_response_callback()\n";
+    // std::cout << "In goal_response_callback()\n";
     if (!goal_handle) {
       RCLCPP_ERROR(this->get_logger(), "Goal was rejected by server");
     } else {
@@ -103,7 +107,7 @@ private:
     const std::shared_ptr<const MessageTurtleCommands::Feedback> feedback)
   {
     std::stringstream ss;
-    ss << "Next number in sequence received: ";
+    ss << "Feedback: " << feedback->odom;
     // for (auto number : feedback->odom) {
     //   ss << number << " ";
     // }
@@ -132,6 +136,7 @@ private:
     //   ss << number << " ";
     // }
     RCLCPP_INFO(this->get_logger(), ss.str().c_str());
+    std::cout << result.result << "\n";
     rclcpp::shutdown();
   }
 };  // class ActionTurtleClient

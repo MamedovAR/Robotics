@@ -1,6 +1,8 @@
+#include <cmath>
 #include <memory>
 #include <thread>
 #include <iostream>
+#include <unistd.h>
 #include <functional>
 #include "rclcpp/rclcpp.hpp"
 #include "turtlesim/msg/pose.hpp"
@@ -35,6 +37,8 @@ public:
       std::bind(&ActionTurtleServer::handle_cancel, this, _1),
       std::bind(&ActionTurtleServer::handle_accepted, this, _1));
       publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle1/cmd_vel", 10);
+      start_x = 5.5;
+      start_y = 5.5;
       // subscription_ = this->create_subscription<turtlesim::msg::Pose>(
       // "cmd_text", 10,  std::bind(&ActionTurtleServer::publish_callback,this,_1));
   }
@@ -64,8 +68,8 @@ private:
   ACTION_TURTLE_COMMANDS_LOCAL
   void handle_accepted(const std::shared_ptr<GoalHandleTurtle> goal_handle)
   {
-    // using namespace std::placeholders;
-    // this needs to return quickly to avoid blocking the executor, so spin up a new thread
+    using namespace std::placeholders;
+    // // this needs to return quickly to avoid blocking the executor, so spin up a new thread
     // std::thread{std::bind(&ActionTurtleServer::execute, this, _1), goal_handle}.detach();
     execute(goal_handle);
   }
@@ -92,9 +96,9 @@ private:
     this->pose.theta;
     std::cout << goal->command;
     if(goal->command=="turn_right")
-              twist.angular.z = -1.5;
+              twist.angular.z = -1.57;
     else if(goal->command=="turn_left")
-              twist.angular.z = 1.5;
+              twist.angular.z = 1.57;
     else if(goal->command=="forward")
               twist.linear.x = 1;
     else if(goal->command=="backward")
@@ -115,8 +119,18 @@ private:
       // Update sequence
       // sequence.push_back(sequence[i] + sequence[i - 1]);
       // Publish feedback
+      int ans=0;
+      if(goal->command=="forward")
+      {
+        if(this->flag==0)this->odomX++;
+        else this->odomY++;
+      }
+      else this->flag++;
+      ans = int(std::sqrt((0 - this->odomX)*(0 - this->odomX)+(0 - this->odomY)*(0 - this->odomY)));
+      feedback->odom +=ans;
+      sleep(1);
       goal_handle->publish_feedback(feedback);
-      RCLCPP_INFO(this->get_logger(), "Publish feedback");
+      RCLCPP_INFO(this->get_logger(), "Publish feedback: %d", feedback->odom);
 
       loop_rate.sleep();
     }
@@ -131,6 +145,8 @@ private:
   // rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr subscription_;
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
   turtlesim::msg::Pose pose;
+  float start_x, start_y;
+  int odomX, odomY, flag;
 
 };  // class FibonacciActionServer
 
