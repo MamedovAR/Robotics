@@ -87,6 +87,7 @@ public:
     goal_pose.x = this->goal_x_;
     goal_pose.y = this->goal_y_;
     double distance_tolerance = 0.1;
+    rclcpp::Rate rate(100);
     geometry_msgs::msg::Twist vel_msg;
 
     if(this->euclidean_distance(goal_pose) >= distance_tolerance)
@@ -100,22 +101,33 @@ public:
       vel_msg.angular.z = this->angular_vel(goal_pose);
 
       this->cmd_vel_pub_->publish(vel_msg);
-      for(int i=0; i<=10; i++)
+      for(int i=0; i<=2; i++)
         this->cmd_vel_pub_->publish(vel_msg);
       vel_msg.linear.x = 0;
       vel_msg.angular.z = 0;
       this->cmd_vel_pub_->publish(vel_msg);
+      rate.sleep();
       // this->rate.sleep();
     }
     else
+    {
       this->timer_->cancel();
+      vel_msg.angular.z = this->goal_theta_-this->pose.theta;
+      vel_msg.angular.x = 0;
+      vel_msg.angular.y = 0;
+      this->cmd_vel_pub_->publish(vel_msg);
+      exit(0);
+      // vel_msg.angular.z = 0;
+      // this->cmd_vel_pub_->publish(vel_msg);
+      // rclcpp::spin(goal_params_);
+    }
   }
 
 private:
-  rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr cmd_vel_sub_;
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
-  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr cmd_vel_sub_;
   rclcpp::Node::SharedPtr goal_params_;
+  rclcpp::TimerBase::SharedPtr timer_;
   turtlesim::msg::Pose pose;
   // rclcpp::Rate rate;
 
