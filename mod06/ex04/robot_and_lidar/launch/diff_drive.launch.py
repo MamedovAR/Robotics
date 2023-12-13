@@ -93,8 +93,14 @@ def generate_launch_description():
         output='screen'
     )
 
+    run_program = Node(
+        package="robot_and_lidar",
+        executable="robot_and_lidar"
+    )
+
     return LaunchDescription([
         gz_sim,
+        run_program,
         DeclareLaunchArgument('rviz', default_value='true',
                               description='Open RViz.'),
         bridge,

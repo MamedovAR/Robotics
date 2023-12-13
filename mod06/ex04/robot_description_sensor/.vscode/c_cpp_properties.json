@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/mar/template_ws/install/sdformat_urdf/include/**",
+        "/home/mar/template_ws/install/ros_ign_interfaces/include/**",
+        "/home/mar/template_ws/install/ros_gz_sim/include/**",
+        "/home/mar/template_ws/install/ros_gz_bridge/include/**",
+        "/home/mar/template_ws/install/ros_gz_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/mar/ros2_ws2/src/notsam/include/**",
+        "/home/mar/ros2_ws2/src/sam_bot_description/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
