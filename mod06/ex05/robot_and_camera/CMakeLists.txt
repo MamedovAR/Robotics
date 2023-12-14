@@ -7,7 +7,6 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
-find_package(vision_opencv REQUIRED)
 find_package(OpenCV REQUIRED)
 
 if(BUILD_TESTING)
@@ -37,6 +36,7 @@ install(
 )
 
 add_executable(robot_and_camera src/robot_and_lidar.cpp)
+include_directories(${OpenCV_INCLUDE_DIRS})
 target_link_libraries(robot_and_camera sfml-graphics sfml-window sfml-system)
 
 # include_directories(
