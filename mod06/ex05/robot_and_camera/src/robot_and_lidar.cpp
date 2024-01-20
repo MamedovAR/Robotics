@@ -4,7 +4,8 @@
 #include <unistd.h>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-// #include "cv_bridge/cv_bridge.h"
+#include "cv_bridge/cv_bridge.h"
+// #include "/opt/ros/humble/include/cv_bridge/cv_bridge/cv_bridge.h"
 #include <opencv2/highgui.hpp>
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
@@ -29,7 +30,7 @@ public:
     // bridge = std::make_shared<cv_bridge::CvImage>();
     cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/robot/cmd_vel", 10);
     subscriber = this->create_subscription<sensor_msgs::msg::Image>("/depth/image", 10, std::bind(&MoveToGoalNode::move2goal, this, std::placeholders::_1));
-    timer_ = this->create_wall_timer(std::chrono::milliseconds(1000),std::bind(&MoveToGoalNode::timer_callback,this));
+    timer_ = this->create_wall_timer(std::chrono::milliseconds(100),std::bind(&MoveToGoalNode::timer_callback,this));
     RCLCPP_INFO(this->get_logger(), "Succesfully created node");
     // move2goal();
   }
@@ -46,11 +47,25 @@ public:
 
   void move2goal(sensor_msgs::msg::Image msg)
   {
-      int h = msg.height;
-      int w = msg.data.size()/h;
+      cv::Mat depth_image = cv_bridge::toCvCopy(msg, msg.encoding)->image;
+      int h = depth_image.rows;
+      int w = depth_image.cols;
+      // depth_image->at(h*240+w/2);
       RCLCPP_INFO(this->get_logger(), "Depth Image Size: %dx%d", h, w);
       std::cout << sizeof(((float*)(msg.data.data()))) << "\n";
-      flag = (((float*)(msg.data.data()))[(h*120+w/2)] < 1);
+      float* arr = depth_image.ptr<float>();
+      RCLCPP_INFO(this->get_logger(), "Create array");
+      int k = 1;
+      float sr = 0;
+      for(int i = -1; i <= 1; i++)
+        for(int j = -1; j <= 1; j++)
+        {
+          sr += arr[(h*(240 + i)+w/2 + j)];
+          k++;
+        }
+      sr /= float(k);
+      RCLCPP_INFO(this->get_logger(), "Distance: %f\n\n\n", sr);
+      flag = (sr < 1);
   };
 
 private:
@@ -59,7 +74,7 @@ private:
   rclcpp::Node::SharedPtr goal_params_;
   rclcpp::TimerBase::SharedPtr timer_;
   bool flag;
-  // std::shared_ptr<cv_bridge::CvImage> bridge;
+  std::shared_ptr<cv_bridge::CvImage> bridge;
   // rclcpp::Rate rate;
 
   bool goal_reached_ = true;

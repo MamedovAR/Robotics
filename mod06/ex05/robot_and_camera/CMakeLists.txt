@@ -49,7 +49,7 @@ target_link_libraries(robot_and_camera sfml-graphics sfml-window sfml-system)
 #     ${vision_opencv_LIBRARIES}
 # )
 
-ament_target_dependencies(robot_and_camera geometry_msgs rclcpp sensor_msgs)
+ament_target_dependencies(robot_and_camera geometry_msgs rclcpp sensor_msgs cv_bridge)
 
 install(TARGETS
   robot_and_camera
